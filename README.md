@@ -22,3 +22,4 @@
 - 성윤환(JAVA)
 - 양권모(JAVA)
 - 이은성(JAVA)
+- 김민석(PYTHON)
