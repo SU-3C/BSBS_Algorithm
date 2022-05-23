@@ -11,6 +11,8 @@ elif h < g < f < e < d < c < b < a:
 else:
 	print(res[2])
 
+# 파이썬은 한번에 비교가 가능 a<b<c<d<e
+
 ''' # 옛날에 풀었던거
 def _(m):
     if m == sorted(m):
