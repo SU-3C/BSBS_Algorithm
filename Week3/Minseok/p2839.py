@@ -16,6 +16,6 @@ if three %3 == 0:   # 만약 변수를 3으로 나눴을때 0이면 그대로 �
 
 for _ in range(1, i//3+2):  
     five = five - 1 # 5kg 포대를 하나씩 줄여서
-    if (three + _*5) % 3 == 0:  # 3kg 포대가 나눠 떨어질떄까지 연산
+    if (three + _*5) % 3 == 0:  # 3kg 포대가 나눠 떨어질때까지 연산
         print(five + (three + 5 * _)//3)    # 나누어 떨어지면 출력 후 종료
         quit()
