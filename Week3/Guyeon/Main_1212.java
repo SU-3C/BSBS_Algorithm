@@ -1,3 +1,5 @@
+package week3;
+
 import java.io.*;
 
 // 1212번 8진수 2진수
