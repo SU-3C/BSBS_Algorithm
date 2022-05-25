@@ -1,0 +1,31 @@
+package week3;
+import java.util.Scanner;
+
+public class Ascending {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int[] inputs = new int[8];
+		for (int i = 0; i < inputs.length; i++) {
+			inputs[i] = sc.nextInt();
+		}
+		//8개의 숫자를 배열에 담아 받는다
+		sc.close();
+		
+		String output = "";
+		for (int i = 0; i < inputs.length - 1; i++) {
+			if (inputs[i] == inputs[i + 1] - 1) {
+				//해당 인덱스의 배열의 값과 다음 인덱스의 배열에 담긴 값 -1 이 같으면
+				output = "ascending";
+			} else if (inputs[i] == inputs[i + 1] + 1) {
+				//해당 인덱스의 배열의 값과 다음 인덱스의 배열에 담긴 값 +1 이 같으면
+				output = "descending";
+			} else {
+				//그렇지 않으면 mixed
+				output = "mixed";
+				break;
+			}
+		}
+		System.out.println(output);
+	}
+}
