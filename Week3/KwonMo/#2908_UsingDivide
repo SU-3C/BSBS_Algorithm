@@ -1,0 +1,38 @@
+package week3;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.StringTokenizer;
+
+public class ReverseNum2 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int A = reverseChar(st.nextToken());
+        int B = reverseChar(st.nextToken());
+        System.out.println(Math.max(A, B));
+    }
+
+    static int reverseChar(String str) {
+        int number = Integer.parseInt(str);
+        int result=number%10*100 + number/10%10*10 + number/100;
+        return result;
+    }
+    
+}
+/*문자열의 위치를 바꾼다
+->ex) 세번째 자리를 첫번째 자리로 바꾸려면
+ 123 % 10 = 3  
+ 3 * 100 = 300
+ 
+ 두번째 자리 계싼
+ 123 / 10 = 12
+ 12 % 10 = 2
+ 2 * 10 = 20
+ 
+ 첫번째 자리를 세번째 자리로 바꾸는 계싼
+ 123 / 100 = 1
+ 
+ => 이걸 다 더하면 reverse다
+*/
