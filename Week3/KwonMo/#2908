@@ -1,0 +1,20 @@
+package week3;
+import java.util.Scanner;
+
+public class ReverseNum {
+ 
+	public static void main(String[] args) {
+ 
+		Scanner sc = new Scanner(System.in);
+        
+		int A = sc.nextInt();
+		int B = sc.nextInt();
+        
+		A = Integer.parseInt(new StringBuilder().append(A).reverse().toString());
+		B = Integer.parseInt(new StringBuilder().append(B).reverse().toString());
+		//StringBuilder생성과 동시에 append로 문자열을 만들고 reverse를 통해 뒤집는다. 이때 담겨진
+		//문자열은 StringBuilder형이므로 toString으로 변환후 String A에 담는다.
+		System.out.print(A > B ? A : B);
+		sc.close();
+	}
+}
