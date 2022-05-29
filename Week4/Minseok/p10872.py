@@ -1,6 +1,8 @@
 # 10872 [b3] 팩토리얼
 
-sum = 1
+result = 1
 for x in range(1, int(input())+1):
-    sum = sum * x
-print(sum)
+    result = result * x
+print(result)
+
+# 1로 시작해 입력받은 수까지 곱해주는 방식
