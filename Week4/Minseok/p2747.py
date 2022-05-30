@@ -11,3 +11,7 @@ for x in range(1, resIndex):
 # for x, i in enumerate(fibo):
 #     print(i, x)
 print(fibo[resIndex])
+
+# 피보나치 동적계획법
+# 재귀함수를 통해 계속 계산하는 것이 아닌
+# 계산한 값을 미리 저장해두고 꺼내오는 방식
