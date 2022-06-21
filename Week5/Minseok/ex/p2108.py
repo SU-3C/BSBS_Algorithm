@@ -1,31 +1,32 @@
 # 2108 [s3] 통계학
 
-nums = [int(input()) for x in range(int(input()))]
+import sys
+from collections import Counter
+
+nums = [int(sys.stdin.readline()) for x in range(int(sys.stdin.readline()))]
 
 nums.sort()
 
-res1 = round(sum(nums) / len(nums))
-res2 = nums[len(nums) // 2]
-res4 = max(nums) - min(nums)
+length = len(nums)
+
+res1 = round(sum(nums) / length)
+res2 = nums[length // 2]
+res4 = nums[-1] - nums[0]
 
 print(res1)
 print(res2)
 
-arr = {}
+dic = {}
 
-if len(nums) == len(set(nums)):
-    if len(nums) > 2:
+if length == len(set(nums)):
+    if length > 2:
         print(nums[1])
     else:
         print(nums[0])
 else:
-    # while len(nums) != len(set(nums)):
-    #     for x in set(nums):
-    #         nums.remove(x)
-    for x in set(nums):
-        arr.update({x: nums.count(x)})
-
-    res3 = [k for k,v in arr.items() if v == arr[max(arr.keys())]]
+    c = Counter(nums)
+    max_key = c.most_common(1)[0][1]
+    res3 = [k for k,v in c.items() if v == max_key]
 
     print((res3[1] if len(res3) > 1 else res3[0]))
 
