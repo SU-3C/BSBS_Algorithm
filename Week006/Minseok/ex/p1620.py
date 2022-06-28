@@ -3,11 +3,21 @@
 import sys
 
 d, s = map(int, input().split())
-dic = {sys.stdin.readline().rstrip():i for i in range(1, d+1)}
+
+dic_s = []
+dic = {}
+
+for x in range(1, d+1):
+    string = sys.stdin.readline().rstrip()
+    dic_s.append(string)
+    dic[string] = x
+
+print(dic_s)
+print(dic)
 
 for x in range(s):
     sol = sys.stdin.readline().strip()
     if sol.isdigit():
-        print(dic[int(sol)-1])
+        print(dic_s[int(sol)-1])
     else:
-        print(dic.index(sol) + 1)
+        print(dic.get(sol))
