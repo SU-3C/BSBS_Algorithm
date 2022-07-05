@@ -1,0 +1,51 @@
+package Week7;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
+
+public class BOJ_Main_4949 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        while (true) {
+            boolean check = false;
+            Stack<Character> stack = new Stack<>();
+            String s = bf.readLine();
+            if (s.equals(".")) {
+                stack.clear();
+                break;
+                //.이있으면 스택을 지우고 종료한다.
+            }
+            for (int i = 0; i < s.length(); i++) {
+                char c = s.charAt(i);
+                if (s.charAt(i) == '(' || s.charAt(i) == '[') {
+                    stack.push(c);
+                    //글자수에 (,[가 있으면 스택에 푸쉬한다.
+                } else if (c == ')') {
+                    if (stack.empty() || stack.peek() != '(') {
+                        check = true;
+                    } else {
+                        stack.pop();
+                    }
+                } else if (c == ']') {
+                    if (stack.empty() || stack.peek() != '[') {
+                        check = true;
+                    } else {
+                        stack.pop();
+                    }
+                    //만약에 ),]가 있으면 스택을 삭제해준다. 즉, 삭제라는건 완전한 괄호가 나타났다는 의미라봐도 된다.
+                    //불완전하다면 check를 두고 넘어간다.
+                }
+            }
+            if (!stack.empty() || check) {
+                System.out.println("NO");
+            } else {
+                System.out.println("YES");
+            //만약 체크가 되어있거나 비어있지 않으면 NO
+            //둘다 아니다 하면 YES를 표시    
+            }
+
+        }
+    }
+}

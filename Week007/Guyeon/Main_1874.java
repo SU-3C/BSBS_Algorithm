@@ -13,11 +13,10 @@ public class Main_1874 {
         int[] a = new int[n];
         StringBuilder sb = new StringBuilder();
         for(int i=0;i<n;i++){
-            int k=Integer.parseInt(br.readLine());
-            a[i]=k;
+            a[i]=Integer.parseInt(br.readLine());
         }
         for(int i=0;i<n;i++){
-            if(!s.contains(a[i])){
+            if(max<=a[i]){
                 for(int j=max;j<a[i];j++){
                     s.push(j);
                     sb.append("+\n");
