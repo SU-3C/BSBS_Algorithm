@@ -2,14 +2,15 @@ package Algorithm08;
 
 import java.io.*;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main_18258 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		Queue<Integer> queue = new LinkedList<>();
+		LinkedList<Integer> queue =new LinkedList<>();
+
+		StringBuilder sb = new StringBuilder();
 		int commandLine = Integer.parseInt(br.readLine());
 		String cmd, val;
 		for (int i = 0; i < commandLine; i++) {
@@ -35,13 +36,13 @@ public class Main_18258 {
 					bw.append(val);
 					break;
 				case "back":
-					LinkedList<Integer> last = (LinkedList<Integer>)queue;
-					val = queue.isEmpty()?"-1\n":last.getLast()+"\n";
+					val = queue.isEmpty()?"-1\n":queue.getLast()+"\n";
 					bw.append(val);
 					break;
 			}//end of switch
-			bw.flush();
+
 		}//end of for
+		bw.flush();
 		br.close();
 		bw.close();
 	}//end of main
