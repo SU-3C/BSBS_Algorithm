@@ -62,3 +62,52 @@ public class Main_1966 {
         bw.flush();
     }
 }
+
+
+
+//    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+//    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+//    Deque<Integer> dq = new LinkedList<>();
+//    int n=Integer.parseInt(br.readLine());
+//    String[] in;
+//    int N,M;
+//        for (int i=0;i<n;i++){
+//        in = br.readLine().split(" ");
+//        N=Integer.parseInt(in[0]);
+//        M=Integer.parseInt(in[1]);
+//        in = br.readLine().split(" ");
+//        dq.clear();
+//        for(int j=0;j<N;j++){
+//        dq.add(Integer.parseInt(in[j]));
+//        }
+//        int top, cnt=0;
+//        boolean flag=false;
+//        while(true){
+//        top=dq.poll();
+//        if (dq.isEmpty()){
+//        bw.write(++cnt + "\n");
+//        break;
+//        }
+//        int k=0;
+//        for(int j : dq) {
+//        if (j > top) {
+//        dq.add(top);
+//        if ( M==0 ) M=dq.size()-1;
+//        else M--;
+//        break;
+//        }
+//        if(k==dq.size()-1){
+//        cnt++;
+//        if (M==0){
+//        bw.write(cnt+"\n");
+//        flag=true;
+//        }
+//        else M--;
+//        }
+//        k++;
+//        }
+//        if (flag)
+//        break;
+//        }
+//        }
+//        bw.flush();
