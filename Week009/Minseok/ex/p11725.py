@@ -3,10 +3,13 @@
 import sys
 input = sys.stdin.readline
 
-i = input()
+i = int(input())
 
-nodes = []
-for x in range(i):
-    t = map(int, input().split())
-    nodes.append(t)
+arr = [str(x) for x in range(1, i+1)]
+
+for x in range(i-1):
+    a, b= map(int, input().split())
+    arr[a-1] = arr[a-1] + f' {b}'
+
+print(arr)
 
