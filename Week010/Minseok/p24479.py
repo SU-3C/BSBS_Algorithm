@@ -2,7 +2,7 @@
 
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(2000000)
 
 V, E, R = map(int, input().split())
 
@@ -32,4 +32,3 @@ dfs(R)
 
 for x in visited[1:]:
     print(x)
-
