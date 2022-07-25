@@ -1,4 +1,4 @@
-# 7576 [g5] 토마토
+# 7576 [g5] 토마토 - 실패
 
 import sys
 input = sys.stdin.readline
