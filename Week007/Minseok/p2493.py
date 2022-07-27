@@ -5,6 +5,7 @@ import sys
 
 _ = int(sys.stdin.readline())
 top = deque(map(int, sys.stdin.readline().split()))
+sorted_top = sorted(top)
 
 stack = deque()
 

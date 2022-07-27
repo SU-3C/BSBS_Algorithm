@@ -21,6 +21,8 @@ def search(a, b):
     cheese[b][a] = 9
     for q, w in tu:
         try:
+            if a+q == -1 or b+w == -1:
+                continue
             if search(a+q, b+w):
                 cheese[b+w][a+q] = 2
         except:
@@ -36,6 +38,7 @@ def count():
     return i
 
 cnt = 0
+last = count()
 
 while (c:=count()) != 0:
     last = c
@@ -43,19 +46,19 @@ while (c:=count()) != 0:
     # print(f'last: {last}, cnt: {cnt}')
     search(0, 0)
 
-    for x in cheese:
-        # print(x)
-        for y in x:
-            if y == 1:
-                print("☆",end="")
-            elif y == 2:
-                print("★",end="")
-            elif y == 9:
-                print("□",end="")
-            elif y == 0:
-                print("■",end="")
-        print()
-    print()
+    # for x in cheese:
+    #     # print(x)
+    #     for y in x:
+    #         if y == 1:
+    #             print("☆",end="")
+    #         elif y == 2:
+    #             print("★",end="")
+    #         elif y == 9:
+    #             print("□",end="")
+    #         elif y == 0:
+    #             print("■",end="")
+    #     print()
+    # print()
 
 print(cnt)
 print(last)

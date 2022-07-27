@@ -27,18 +27,22 @@ while True:
     sec += 1
     next_x, next_y = map(lambda x, y: x+y, snake[0], direction[direct])
     if next_x < 0 or N <= next_x or next_y < 0 or N <= next_y:
+        # 벽에 충돌한 경우
         print(sec)
         break
 
     c = board[next_y][next_x]
     if (next_x, next_y) in snake or c == 9:
+        # 본인의 몸에 충돌한 경우
         print(sec)
         break
     elif c == 1:
+        # 사과를 먹었을 경우
         snake.appendleft((next_x, next_y))
         board[next_y][next_x] = 0
 
     else:
+        # 위의 세 경우를 제외한 이동하는 경우
         snake.pop()
         snake.appendleft((next_x, next_y))
 

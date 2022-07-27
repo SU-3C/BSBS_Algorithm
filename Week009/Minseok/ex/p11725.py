@@ -1,4 +1,4 @@
-# 11725 [s2] 트리의 부모 찾기
+# 11725 [s2] 트리의 부모 찾기 - 푸는 중
 
 import sys
 input = sys.stdin.readline
