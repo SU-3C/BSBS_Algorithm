@@ -16,7 +16,9 @@ fun main() {
     }
 
     val root = input[2].toInt()
-
+    for(i in list){
+        i.sort()
+    }
     /*fun dfs() {           //TODO 스택 이용
         for(i in list){
             i.sortByDescending { it }
@@ -74,5 +76,7 @@ fun main() {
     }
 //    dfs()
     dfsR(root)
+    println()
+    visited.clear()
     bfs()
 }
