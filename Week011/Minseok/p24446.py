@@ -29,25 +29,28 @@ side = 0
 def bfs(i):
     global cnt
     global side
-    print(f'bfs {i} {visited[i]} {cnt} {side}')
+    # print(f'bfs {i} {visited[i]} c:{cnt} s:{side}')
     if visited[i] != -1:
         return
     # print(f'bfs {i} {c}')
     visited[i] = 0+cnt
 
-    print(f'l: {line[i]}')
+    # print(f'l: {line[i]}')
     for x in line[i]:
         if visited[x] == -1:
             queue.append(x)
+            # side += 1
 
     if side != 0:
         side -= 1
 
     # cnt += 1
-    print(f'q: {queue} {side}')
+    # print(f'q: {queue} {side}')
     while queue:
         if side == 0:
-            side = len(queue) - 1
+            side = len(queue) - queue.count(0)
+            if side == 0:
+                break
             queue.append(0)
             continue
         t = queue.popleft()
