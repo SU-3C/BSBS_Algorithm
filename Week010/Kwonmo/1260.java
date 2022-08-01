@@ -23,10 +23,10 @@ public class Main {
         
         // 노드와 간선에 대한 값을 초기화
         for(int i = 0 ; i < m; i++){
-            st= new StringTokenizer(br.readLine());
-            int s = Integer.parseInt(st.nextToken());
+            st= new StringTokenizer(br.readLine()); //입력 하나 더 받음
+            int s = Integer.parseInt(st.nextToken()); 
             int e = Integer.parseInt(st.nextToken());
-            arr[s][e] = 1;
+            arr[s][e] = 1; //정점과 정점을 연결 이때 양방향이라 se es다 연결
             arr[e][s] = 1;
         }
 
@@ -38,19 +38,19 @@ public class Main {
     }
     
     // check배열 false로 초기화
-    public static void initCheck(){
+    public static void initCheck(){ 
         for(int i = 0 ; i < check.length; i++) check[i] = false;
     }
 
     //dfs 메소드
-    public static void dfs(int start){
+    public static void dfs(int start){ //재귀형태로 구현
         // 경로 출력
         sb.append(start + " ");
         // 현재 노드 방문 처리
         check[start] = true;
 
         for(int i = 1; i < check.length; i++)
-            // 현재 노드와 다른 노드 중 && 미방문 && 간선이 존재
+            // 현재 노드와 다른 노드 중 && 미방문 && 간선이 존재 -> 해당 정점의 자식 노드로 계속 파고 들어감
             if(i != start && check[i] == false && arr[start][i] == 1)
                 dfs(i);
 
@@ -66,8 +66,8 @@ public class Main {
         check[start] = true;
 
         while(!queue.isEmpty()){
-            int num = queue.poll();
-            sb.append(num + " ");
+            int num = queue.poll(); //큐 제일 앞값을 반환 후 삭제
+            sb.append(num + " "); //stringbuilder sb객체에 계속 문자열 쌓임 
 
             for(int i = 1; i < check.length; i++){
                 // 현재 노드와 다른 노드 중 && 미방문 && 간선이 존재
