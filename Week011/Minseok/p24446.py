@@ -9,10 +9,15 @@ sys.setrecursionlimit(2000000)
 
 V, E, R = map(int, input().split())
 
-visited = deque([-1 for x in range(V+1)])
+visited = deque([0 for x in range(V+1)])
+
 line = [[] for x in range(V+1)]
+depths = deque([-1 for x in range(V+1)])
+
+access = deque([1 for x in range(V+1)])
 
 queue = deque()
+temp_queue = deque()
 
 for x in range(E):
     a, b = map(int, input().split())
@@ -23,46 +28,41 @@ for x in range(E):
 for x in line: # 내림 차순
     x.sort()
 
-cnt = 1
-side = 0
+dep = 0
 
 def bfs(i):
-    global cnt
-    global side
-    # print(f'bfs {i} {visited[i]} c:{cnt} s:{side}')
-    if visited[i] != -1:
+    global dep
+    if not visited:
         return
-    # print(f'bfs {i} {c}')
-    visited[i] = 0+cnt
+    visited[i] = 1
+    access[i] = 0
 
-    # print(f'l: {line[i]}')
+    # print(f'{i} {depths}')
+
     for x in line[i]:
-        if visited[x] == -1:
-            queue.append(x)
-            # side += 1
+        # print(f'x{x} v{not visited[x]} t{not x in temp_queue}')
+        if access[x]:
+            temp_queue.append(x)
+            access[x] = 0
 
-    if side != 0:
-        side -= 1
-
-    # cnt += 1
-    # print(f'q: {queue} {side}')
     while queue:
-        if side == 0:
-            side = len(queue) - queue.count(0)
-            if side == 0:
-                break
-            queue.append(0)
-            continue
+        # print(f'now queue: {queue}')
         t = queue.popleft()
-        # print(queue)
         if t == 0:
-            cnt += 1
+            dep += 1
+            queue.extend(temp_queue)
+            temp_queue.clear()
             continue
+        depths[t] = 0+dep
+        if not queue:
+            # print(f'nq: {temp_queue}')
+            queue.append(0)
         bfs(t)
 
+queue.append(0)
+depths[R] = 0
 bfs(R)
-visited[R] = 0
 
-visited.popleft()
-for x in visited:
+depths.popleft()
+for x in depths:
     print(x)
