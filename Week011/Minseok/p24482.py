@@ -1,4 +1,4 @@
-# 24481 [s2] 깊이 우선 탐색 3
+# 24482 [s2] 깊이 우선 탐색 4
 
 import sys
 input = sys.stdin.readline
@@ -15,12 +15,12 @@ for x in range(E): # 간선 입력
     line[v].append(u)
 
 for x in line:
-    x.sort()
+    x.sort(reverse=True) # 역순
 
 cnt = 1
 dep = 1
 
-def dfs(V, d): # N번쨰 탐색과 d라는 깊이를 통해 저장
+def dfs(V, d):
     global cnt
     if visited[V]:
         return;

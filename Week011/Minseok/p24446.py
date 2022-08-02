@@ -41,20 +41,21 @@ def bfs(i):
 
     for x in line[i]:
         # print(f'x{x} v{not visited[x]} t{not x in temp_queue}')
-        if access[x]:
+        if access[x]: # 접근 제어용 배열
             temp_queue.append(x)
             access[x] = 0
 
     while queue:
         # print(f'now queue: {queue}')
         t = queue.popleft()
-        if t == 0:
+        if t == 0: # 0일 경우 임시배열을 배열에 통합 후 깊이에 +1
             dep += 1
             queue.extend(temp_queue)
-            temp_queue.clear()
+            temp_queue.clear() # 임시배열 비우기
             continue
         depths[t] = 0+dep
         if not queue:
+            # 배열이 비어있다면 0을 배열에 추가
             # print(f'nq: {temp_queue}')
             queue.append(0)
         bfs(t)
@@ -65,4 +66,5 @@ bfs(R)
 
 depths.popleft()
 for x in depths:
+    # print(f'{q} {x}')
     print(x)
