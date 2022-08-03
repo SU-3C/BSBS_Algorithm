@@ -41,8 +41,7 @@ public class Main_24481 {
         dfs(r);
         for(int i=1;i<n+1;i++) {
     		System.out.println(depth[i]);
-    	}
-        
+	}
     }
     public static void dfs(int x){
     	visited[x] = true;
