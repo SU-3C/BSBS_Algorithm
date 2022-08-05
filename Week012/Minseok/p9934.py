@@ -18,7 +18,7 @@ from collections import deque
 
 K = int(input())
 tK = 0+K
-# buildings = map(int, input().split())
+buildings = deque(map(int, input().split()))
 
 arr = deque()
 cnt = 1
@@ -29,8 +29,10 @@ n.me = cnt
 arr.append(n)
 tarr = deque()
 
+
+# 이진트리 생성
 while tK-1>0:
-    print(f'{tK} {len(arr)}')
+    # print(f'{tK} {len(arr)}')
     t = arr.popleft()
     t.left = Node()
     cnt += 1
@@ -39,7 +41,7 @@ while tK-1>0:
     cnt += 1
     t.right.set(0+cnt)
 
-    print(f'm- {t.left.me} {t.right.me}')
+    # print(f'm- {t.left.me} {t.right.me}')
 
     tarr.append(t.left)
     tarr.append(t.right)
@@ -48,8 +50,22 @@ while tK-1>0:
         tarr.clear() 
         tK -= 1
 
-print(f'L==========')
+cnt = 0
 
+def scan(n):
+    global cnt
+    if n.left != None:
+        scan(n.left)
+    n.me = buildings[cnt]
+    cnt += 1
+    if n.right != None:
+        scan(n.right)
+
+scan(n)
+
+
+
+# 최종 출력
 
 arr.clear()
 arr.append(n)
@@ -57,7 +73,7 @@ arr.append(n)
 while K>0:
     # input()
     t = arr.popleft()
-    print(f'me: {t.me} len:{len(arr)}')
+    print(f'{t.me}', end=" ")
 
     if t.left != None:
         tarr.append(t.left)
@@ -65,10 +81,7 @@ while K>0:
     if len(arr) == 0:
         arr.extend(tarr)
         tarr.clear()
+        print()
         K -= 1
 
-
-# N
-# N의 왼쪽
-# N의 오른쪽
-# 
+# 그냥 중위 순회
