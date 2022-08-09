@@ -1,6 +1,6 @@
 # 9934 [s1] 완전 이진 트리
 
-class Node:
+class Node: # 이진트리 구조체
     me = -1
     left = None
     right = None
@@ -62,8 +62,6 @@ def scan(n):
         scan(n.right)
 
 scan(n)
-
-
 
 # 최종 출력
 

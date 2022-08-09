@@ -20,8 +20,12 @@ for x in range(E):
     line[a].append(b)
     line[b].append(a)
 
+q = 0
 for x in line: # 내림 차순
-    x.sort(reverse=True)
+#    x.sort(reverse=True)
+    x.sort()
+    print(f"{q} {x}")
+    q+=1
 
 cnt = 1
 
@@ -42,5 +46,7 @@ def bfs(i):
 
 bfs(R)
 
+q = 1
 for x in visited[1:]:
-    print(x)
+    print(f'{q} {x}')
+    q+=1
