@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 
-public class Main_1068 {
+public class Main_1068_Fail {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -13,24 +13,24 @@ public class Main_1068 {
 		String[] linkParentNodes = br.readLine().split(" ");//second Line
 		int RemoveNodeNumber = Integer.parseInt(br.readLine());
 
-		LinkedList<Node> givenNodes = new LinkedList<>();
+		Node[] givenNodes = new Node[totalNode];
 		for (int i = 0; i < totalNode; i++) {
-			givenNodes.add(new Node(i));
+			givenNodes[i]=new Node(i);
 		}
 
 		int parentValue;
-		for (int i = 0; i < givenNodes.size(); i++) {
+		for (int i = 0; i < givenNodes.length; i++) {
 			parentValue = Integer.parseInt(linkParentNodes[i]);//-1 0 0 2 2 4 4 6 6
 			if (parentValue != -1) {//부모가 없으면 -1이므로 부모가 없다면 넘어감 매핑 안해줌
-				givenNodes.get(i).parent = givenNodes.get(parentValue);
-				givenNodes.get(parentValue).child.add(givenNodes.get(i));
+				givenNodes[i].parent = givenNodes[parentValue];
+				givenNodes[parentValue].child.add(givenNodes[i]);
 			}
 		}
 		//요소 삭제
-		givenNodes.remove(RemoveNodeNumber);//LinkedList는 중간요소를 삭제해도 인덱스요소가 땡겨오지 않음(ArrayList는 반대)
+		givenNodes[RemoveNodeNumber]=null;
 
-		findRoot(givenNodes.get(0));
-		leafCounter(givenNodes.get(root));
+		findRoot(givenNodes[0]);
+		leafCounter(givenNodes[root]);
 		System.out.println(result);
 
 
@@ -38,6 +38,7 @@ public class Main_1068 {
 
 	static int root;
 	static void findRoot(Node target) {
+		if(target==null)return;
 		if (target.parent != null)
 			findRoot(target.parent);
 		else
