@@ -51,7 +51,7 @@ for _ in range(N):
             root.childs = sorted(root.childs, key=lambda x: x.name)
         root = newNode
 
-fs.childs = sorted(fs.childs, key=lambda x: x.name)
+fs.childs = sorted(fs.childs, key=lambda x: x.name).sort()
 
 def printChild(c, dep):
     # print(f'-{c.name}')
