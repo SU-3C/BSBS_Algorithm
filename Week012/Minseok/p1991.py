@@ -62,10 +62,22 @@ def lscan(n):
         lscan(n.right)
     resl.append(n.me)   # 본인 탐색
 
-fscan(dic['A']) # 루트 노드는 'A' 지정(문제)
-mscan(dic['A'])
-lscan(dic['A'])
+def scan(n):
+    resf.append(n.me)
+    if n.left:
+        scan(n.left)
+    resm.append(n.me)
+    if n.right:
+        scan(n.right)
+    resl.append(n.me)
 
-print(f'{"".join(resf)}') # 배열 내 값을 문자열로 변환
-print(f'{"".join(resm)}')
-print(f'{"".join(resl)}')
+scan(dic['A'])
+*map(print, ["".join(resf), "".join(resm), "".join(resl)]),
+
+#fscan(dic['A']) # 루트 노드는 'A' 지정(문제)
+#mscan(dic['A'])
+#lscan(dic['A'])
+#
+#print(f'{"".join(resf)}') # 배열 내 값을 문자열로 변환
+#print(f'{"".join(resm)}')
+#print(f'{"".join(resl)}')

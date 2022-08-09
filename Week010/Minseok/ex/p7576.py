@@ -1,4 +1,4 @@
-# 7576 [g5] 토마토 - 실패
+# 7576 [g5] 토마토
 
 import sys
 input = sys.stdin.readline
@@ -7,57 +7,53 @@ from collections import deque
 
 M, N = map(int, input().split())
 
-tomato = []
+tomato = deque()
 search_table = deque()
 search_temp = set()
-for _ in range(N):
-    tomato.append(list(map(int, input().split())))
+
+walls = 0
+day = 0
 
 tu = [(0, -1), (-1, 0), (1, 0), (0, 1)]
 
-for x in range(M):
-    for y in range(N):
-        if tomato[y][x] == 1:
-            search_table.append((y, x))
+for x in range(N):
+    tomato.append(deque())
+    for i, y in enumerate(map(int, input().split())):
+        tomato[x].append(y)
+        if y == 1:
+            search_temp.add((x, i))
+        elif y == -1:
+            walls += 1
+
+temp_value = M*N-len(search_temp) - walls
+
+cnt = 0
 
 def search(b, a):
+    # print(f'ex: {tomato[b][a]}')
+    global cnt
+    cnt += 1
+    global temp_value
     for q, w in tu:
-        # print(f'|{a+q}, {b+w}')
         try:
-            # print(f'|{b+w},{a+q} {tomato[b+w][a+q]} {tomato[b+w][a+q] == 0 or tomato[b+w][a+q] == 9}')
             if b+w == -1 or a + q == -1:
                 continue
             if tomato[b+w][a+q] == 0:
-                # search_temp.append((b+w, a+q))
                 search_temp.add((b+w, a+q))
-                tomato[b+w][a+q] = 2
+                temp_value -= 1
+                tomato[b+w][a+q] = tomato[b][a] + 1# 2
         except:
             pass
 
-def count(arr):
-    i = 0
-    for x in range(N):
-        i += arr[x].count(0)
-        for y in range(M):
-            if arr[x][y] == 2:
-                arr[x][y] = 1
-    return i
-
-cnt = 0
-z = count(tomato)
 while True:
-    if z == 0:
-        break
-    cnt += 1
-
-    search_temp = set()
-    while search_table:
-        t = search_table.pop()
-        # print(t)
-        x, y = t
+    day += 1
+    t = 0 + temp_value
+    if search_temp:
+        search_table.clear()
+        search_table.extend(search_temp)
+        search_temp.clear()
+    for x, y in search_table:
         search(x, y)
-    # print(search_temp)
-    search_table = deque(search_temp)
 
     # for x in tomato:
     #     for y in x:
@@ -70,17 +66,26 @@ while True:
     #         elif y == -1:
     #             print("□", end="")
     #     print()
+    # print(f'{temp_value} : {t}')
     # print()
-    
+
+    # for x in tomato:
+    #     for y in x:
+    #         if y == 0:
+    #             print("■", end="")
+    #         elif y == -1:
+    #             print("□", end="")
+    #         else:
+    #             print(f"{y}", end="")
+    #     print()
+    # print(f'{temp_value} : {t}')
     # print()
 
-
-    x = count(tomato)
-
-    if z == x:
-        if x > 0:
-            cnt = -1
+    if temp_value == t:
         break
-    z = x
 
-print(cnt)
+# q = sum(tomato, []).count(0)
+
+print(-1 if temp_value > 0 else day-1)
+
+#print(f'cnt: {cnt}')
