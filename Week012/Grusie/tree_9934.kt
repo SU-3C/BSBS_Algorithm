@@ -1,10 +1,12 @@
 package grusie.tree
 
 fun main() {
-    val level = readLine()!!.toInt()
+    var level = readLine()!!.toInt()
     var input = readLine()!!.split(" ").map { it.toInt() }
     var result = MutableList(input.size) { mutableListOf(0) }
     var count = 0
+    val queue = ArrayDeque<List<Int>>()
+
 
     fun devide(input: List<Int>) {
         try {
@@ -17,15 +19,14 @@ fun main() {
             for (i in input.size / 2 + 1 until input.size) {
                 rest_half[i - (input.size / 2 + 1)] = input[i]
             }
-            if (flag) {
-                result[0].add(input[input.size / 2])
-            } else {
-                result[1].add(input[input.size / 2])
-            }
-            devide(half)
-            devide(rest_half)
+            print("${input[input.size / 2]} ")
+            queue.add(half)
+            queue.add(rest_half)
         } catch (e: Exception) {}
     }
-    devide(input)
-    print(result)
+    queue.add(input)
+    while(!queue.isEmpty()){
+        devide(queue.removeFirst())
+        count++
+    }
 }
