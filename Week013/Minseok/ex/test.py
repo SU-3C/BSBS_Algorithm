@@ -11,7 +11,7 @@ class Node:
     def setChilds(self, ch):
         self.childs.append(ch)
 
-tc = 3000000
+tc = 30000000
 
 def test1():
     t = [x for x in range(tc)]
@@ -124,12 +124,56 @@ def test4():
     print(f'diff {(c-b) - (b-a)}')
     print()
 
+def test5():
+    t = deque([0 for x in range(tc)])
+
+    a = time()
+
+    arr = t.copy()
+
+    b = time()
+
+    arr2 = deque()
+    arr2, t = t, arr2
+
+    c = time()
+
+    print(b-a)
+    print(c-b)
+
+    print()
+
+    print((c-b)-(b-a))
+
+    print()
+
+def test6():
+    t = deque([x for x in range(tc)])
+    arr = t.copy()
+    arr2 = t.copy()
+
+    a = time()
+
+    arr.clear()
+
+    b = time()
+
+    while arr2:
+        arr2.pop()
+
+    c = time()
+
+    print(b-a)
+    print(c-b)
+
+    print()
+    print((c-b)-(b-a))
 
 for x in range(10):
     # q, w, e, r = test1()
     # a, s, d = test2()
 
-    test4()
+    test6()
 
     # print(q, w, e)
 

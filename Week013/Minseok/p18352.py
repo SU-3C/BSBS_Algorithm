@@ -13,7 +13,7 @@ from collections import deque
 N, M, K, X = map(int, input().split())
 
 lines = deque([deque() for x in range(N+1)])
-visited = deque([-1 for x in range(N+1)])
+visited = deque([1 for x in range(N+1)])
 res = deque()
 
 for x in range(M):
@@ -24,9 +24,27 @@ queue = deque()
 tqueue = deque()
 dep = 0
 
+
 tqueue.append(X)
+visited[X] = 0
 
 while True:
+    if dep == K:
+        break
+    queue, tqueue = tqueue, queue
+    dep += 1
+
+    # print(f'{queue} {tqueue}')
+    for _ in queue:
+        for x in lines[_]:
+            if visited[x]:
+                tqueue.append(x)
+                visited[x] = 0
+    queue.clear()
+
+while True:
+    # print(f'Q {queue}')
+    # print(f'TQ {tqueue}')
     if not queue:
         if dep == K:
             break
