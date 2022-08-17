@@ -1,4 +1,4 @@
-# 18352 [s1] 특정 거리의 도시 찾기
+# 18352 [s1] 특정 거리의 도시 찾기 - pypy clear
 
 import sys
 input = sys.stdin.readline
@@ -24,7 +24,6 @@ queue = deque()
 tqueue = deque()
 dep = 0
 
-
 tqueue.append(X)
 visited[X] = 0
 
@@ -46,10 +45,10 @@ while True:
     # print(f'Q {queue}')
     # print(f'TQ {tqueue}')
     if not queue:
-        if dep == K:
+        if dep == K: # 깊이가 K인 노드들이 들어있는 tqueue
             break
-        queue = tqueue.copy()
-        tqueue.clear()
+        queue, tqueue = tqueue, queue
+        # 비어있는 queue와 다음 정보를 가진 tqueue의 주소를 교환 O(1)
         dep += 1
 
     # print(f'{queue} {tqueue}')
