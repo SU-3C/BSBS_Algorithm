@@ -11,11 +11,11 @@ class Solution {
         String str = "";
         int i = 0;
         while (str.length() < t*m){
-            str += Integer.toString(i++, n).toUpperCase();
+            str += Integer.toString(i++, n);
         }
         for (int j = 0; j < t; j++){
             answer += str.charAt(j*m + (p-1));
         }
-        return answer;
+        return answer.toUpperCase();
     }
 }
