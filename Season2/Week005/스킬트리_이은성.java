@@ -1,10 +1,11 @@
-public int solution(String skill, String[] skill_trees) {
+ public int solution(String skill, String[] skill_trees) {
         List<String> skillOrder = new ArrayList<>();
         List<Boolean> skillVisit =new ArrayList<>();
         int index = 0;
         int answer = 0;
         for (int i = 0; i < skill.length(); i++) {
             skillOrder.add(String.valueOf(skill.charAt(i)));
+            skillVisit.add(false);
         }
 
         for (String userSkillSet : skill_trees) {
@@ -19,16 +20,12 @@ public int solution(String skill, String[] skill_trees) {
                         skillVisit.clear();
                         break;
                     } else {
-                        skillVisit.add(true);
+                        skillVisit.set(index,true);
                         index++;
                     }
                 }
             }
-            if(skillVisit.isEmpty()){
-                continue;
-            }else {
-                answer++;
-            }
+           answer++;
         }
         return answer;
     }
