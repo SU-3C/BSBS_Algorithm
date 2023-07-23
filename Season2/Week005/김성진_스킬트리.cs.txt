@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+
+class SkillNode
+{
+    public bool isVisit;
+    public char skill;
+
+    public SkillNode(bool isVisit, char skill)
+    {
+        this.isVisit = isVisit;
+        this.skill = skill;
+    }
+}
+
+public class Solution
+{
+    public int solution(string skill, string[] skill_trees)
+    {
+        List<SkillNode> list = new List<SkillNode>();
+        int answer = 0;
+
+        for (int i = 0; i < skill.Length; i++)
+        {
+            list.Add(new SkillNode(false, skill[i]));
+        }
+
+        for (int i = 0; i < skill_trees.Length; i++)
+        {
+            int listIndex = 0;
+            bool isSuccess = true;
+            for (int j = 0; j < skill_trees[i].Length; j++)
+            {
+                if (!skill.Contains(skill_trees[i][j]))
+                {
+                    continue;
+                }
+                if (list[listIndex].isVisit)
+                {
+                    continue;
+                }
+
+                if (list[listIndex].skill.Equals(skill_trees[i][j]))
+                {
+                    listIndex++;
+                    continue;
+                }
+                else
+                {
+                    isSuccess = false;
+                    break;
+                }
+            }
+
+            if (isSuccess)
+            {
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+}
