@@ -1,6 +1,6 @@
- public int solution(String skill, String[] skill_trees) {
+    public int solution(String skill, String[] skill_trees) {
         List<String> skillOrder = new ArrayList<>();
-        List<Boolean> skillVisit =new ArrayList<>();
+        List<Boolean> skillVisit = new ArrayList<>();
         int index = 0;
         int answer = 0;
         for (int i = 0; i < skill.length(); i++) {
@@ -9,8 +9,8 @@
         }
 
         for (String userSkillSet : skill_trees) {
-            index =0;
-            Collections.fill(skillVisit,false);
+            index = 0;
+            Collections.fill(skillVisit, false);
             for (int i = 0; i < userSkillSet.length(); i++) {
                 String ASkill = String.valueOf(userSkillSet.charAt(i));
                 if (!skillOrder.contains(ASkill)) {
@@ -20,12 +20,14 @@
                         skillVisit.clear();
                         break;
                     } else {
-                        skillVisit.set(index,true);
+                        skillVisit.set(index, true);
                         index++;
                     }
                 }
             }
-           answer++;
+            if (skillVisit.contains(true)) {
+                answer++;
+            }
         }
         return answer;
     }
