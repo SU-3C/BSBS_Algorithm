@@ -1,0 +1,82 @@
+using System.Collections.Generic;
+using System;
+using System.Collections;
+
+class Solution
+{
+    public static Queue<Task> TaskQueue=new Queue<Task>();
+    public static List<Task> TaskList=new List<Task>();
+
+    public int[] solution(int[] progresses, int[] speeds)
+    {
+        List<int> answer = new List<int>();
+        for (int i = 0; i < progresses.Length; i++)
+        {
+            Task task = new Task(progresses[i], speeds[i]);
+            TaskList.Add(task);
+            TaskQueue.Enqueue(task);
+        }
+
+        while (true)
+        {
+            if (TaskQueue.Count == 0)
+            {
+                break;
+            }
+            foreach (var t in TaskList)
+            {
+                t.After();
+            }
+            int cnt = PopQueue();
+            if (cnt > 0)
+            {
+                answer.Add(cnt);
+            }
+        }
+        
+        return answer.ToArray();
+    }
+
+    public static int PopQueue()
+    {
+        int cnt = 0;
+        while (TaskQueue.Count>0)
+        {
+            Task task = TaskQueue.Peek();
+            if (task.progress >= 100)
+            {
+                TaskQueue.Dequeue();
+                cnt++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        return cnt;
+    }
+}
+public class Task
+{
+    public int progress;
+    public int speed;
+
+    public Task(int progress, int speed)
+    {
+        this.progress = progress;
+        this.speed = speed;
+    }
+
+    public bool After()
+    {
+        progress += speed;
+        if (progress >= 100)
+        {
+            return true;
+        }
+
+        return false;
+    }
+}
+s
