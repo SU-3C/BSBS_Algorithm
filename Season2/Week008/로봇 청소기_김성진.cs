@@ -111,10 +111,6 @@ public class Solution
                 r = x;
                 c = y;
                 //1번으로 돌아간다
-                if (c == -2)
-                {
-            
-                }
                 return 1;
             }
         }
