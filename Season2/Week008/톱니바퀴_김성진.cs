@@ -63,6 +63,7 @@ public class Solution
     public static void Main()
     {
         Solution solution = new Solution();
+        //1.입력 받기(초기화)
         solution.Initialize();
 
         int rotateCount = int.Parse(Console.ReadLine());
@@ -73,11 +74,16 @@ public class Solution
             string[] input = Console.ReadLine().Split();
             x = int.Parse(input[0]);
             y = int.Parse(input[1]);
+            //0~3번 기어의 환전 방향 구하는 함수
+            // -1 : 회전 안함
+            // 0: 반시계방향
+            // 1: 시계방향
             List<int> directList=solution.CalculateDirectionGear(x-1, y == 1);
             for (int j = 0; j < directList.Count; j++)
             {
                 if (directList[j] > -1)
                 {
+                    //기어 돌리기 
                     solution.RotateGear(j,directList[j]==1);
                 }
             }
@@ -128,6 +134,8 @@ public class Solution
          currentrgearNumber = gearNumber;
          currentrotateDir = rotateDir;
 
+         
+        //왼쪽 기어들 구하기 
         while (true)
         {
             if (currentrgearNumber == 3) break;
@@ -144,6 +152,7 @@ public class Solution
             }
         }
         
+        //오른쪽 기어들 구하기 
          currentrgearNumber = gearNumber;
          currentrotateDir = rotateDir;
         while (true)
