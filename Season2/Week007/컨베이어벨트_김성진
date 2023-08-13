@@ -1,0 +1,148 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+
+public class ContainerBelt
+{
+    public int Durability;
+    public bool isRobot;
+    public ContainerBelt previousbelt=null;
+    public ContainerBelt nextbelt=null;
+
+    public ContainerBelt(int durability, bool isRobot)
+    {
+        Durability = durability;
+        this.isRobot = isRobot;
+    }
+}
+
+public class Solution
+{
+    public ContainerBelt DropBelt = null;
+    private LinkedList<ContainerBelt> _containerBelts = new LinkedList<ContainerBelt>();
+    private int length, N, K = 0;
+        Stopwatch stopwatch = new Stopwatch();
+
+    public static void Main()
+    {
+        Solution solution = new Solution();
+        solution.solution();
+    }
+    public void solution()
+    {
+        stopwatch.Start();
+        string[] inputarr1 = Console.ReadLine().Split();
+        // string[] inputarr2 = Console.ReadLine().Split();
+        stopwatch.Start();
+        N = int.Parse(inputarr1[0]);
+        K = int.Parse(inputarr1[1]);
+        length = 2 * N;
+
+        int[] aa = new int[2] { 1000, 1 };
+        ContainerBelt temp=null;
+        for (int i = 0; i < length; i++)
+        {
+            ContainerBelt belt = new ContainerBelt(aa[i%2], false);
+            if (temp != null)
+            {
+                temp.nextbelt = belt;
+                belt.previousbelt = temp;
+            }
+            _containerBelts.AddLast(belt);
+            if (i == N - 1)
+            {
+                DropBelt = belt;
+            }
+
+            temp = belt;
+        }
+
+        _containerBelts.Last.Value.nextbelt = _containerBelts.First.Value;
+        _containerBelts.First.Value.previousbelt = _containerBelts.Last.Value;
+
+        int answer = -1;
+        while (true)
+        {
+            answer++;
+            RotateContainerBelt();
+            if (!MoveRobot())
+            {
+                break;
+            }
+            PutRobot();
+        }
+
+        Console.WriteLine(answer);
+        Console.WriteLine(stopwatch.Elapsed);
+    }
+
+    //1.벨트가 각 칸 위에 있는 로봇과 함께 한 칸 회전한다.
+    public void RotateContainerBelt()
+    {
+        ContainerBelt belt = _containerBelts.Last.Value;
+        _containerBelts.Remove(_containerBelts.Last);
+        _containerBelts.AddFirst(belt);
+        DropBelt = DropBelt.previousbelt;
+        DropRobot();
+    }
+
+    //2.가장 먼저 벨트에 올라간 로봇부터, 벨트가 회전하는 방향으로 한 칸 이동할 수 있다면 이동한다. 만약 이동할 수 없다면 가만히 있는다.
+    public bool MoveRobot()
+    {
+        int index = 0;
+        Stack<ContainerBelt> robots = new Stack<ContainerBelt>();
+        foreach (var belt in _containerBelts)
+        {
+            if (belt.isRobot)
+                robots.Push(belt);
+
+            if (belt.Durability <= 0)
+            {
+                index++;
+            }
+        }
+
+        if (index >= K)
+        {
+            return false;
+        }
+        while (robots.Count > 0)
+        {
+            ContainerBelt belt = robots.Pop();
+            MovethisRobot(belt);
+        }
+
+        DropRobot();
+        return true;
+    }
+
+//3.올리는 위치에 있는 칸의 내구도가 0이 아니면 올리는 위치에 로봇을 올린다.
+    public void PutRobot()
+    {
+        ContainerBelt belt = _containerBelts.First.Value;
+        if (belt.Durability > 0)
+        {
+            belt.isRobot = true;
+            belt.Durability--;
+        }
+    }
+    
+
+    public void DropRobot()
+    {
+        DropBelt.isRobot = false;
+    }
+
+    public void MovethisRobot(ContainerBelt belt)
+    {
+        ContainerBelt nextBelt;
+        nextBelt = belt.nextbelt;
+        
+        if (nextBelt.Durability > 0 && !nextBelt.isRobot)
+        {
+            nextBelt.isRobot = true;
+            belt.isRobot = false;
+            nextBelt.Durability--;
+        }
+    }
+}
